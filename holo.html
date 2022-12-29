@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hodlinfo</title>
+  <style>
+    /* Add your CSS styles here */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Last</th>
+        <th>Buy</th>
+        <th>Sell</th>
+        <th>Volume</th>
+        <th>Base Unit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- The data from the database will be added here -->
+    </tbody>
+  </table>
+
+  <!-- Add your JavaScript code here -->
+  <script>
+    // Make a request to the backend route
+    fetch('/tickers')
+      .then((response) => response.json())
+      .then((data) => {
+        // Get a reference to the table body
+        const tbody = document.querySelector('tbody');
+
+        // Loop through the data and add a row for each item
+        data.forEach((item) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${item.name}</td>
+            <td>${item.last}</td>
+            <td>${item.buy}</td>
+            <td>${item.sell}</td>
+            <td>${item.volume}</td>
+            <td>${item.base_unit}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      });
+  </script>
+</body>
+</html>
